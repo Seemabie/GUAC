@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guac-O-Licious | Fresh & Healthy Mexican Grill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fiesta-red: #C41E3A;
+            --fiesta-green: #228B22;
+            --fiesta-yellow: #FFD700;
+            --fiesta-orange: #FF6B35;
+            --fiesta-pink: #FF69B4;
+            --fiesta-teal: #20B2AA;
+            --cream: #FFF8E7;
+            --cream-dark: #F5E6C8;
+            --brown: #8B4513;
+            --brown-dark: #5D3A1A;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--cream);
+            color: var(--brown-dark);
+            overflow-x: hidden;
+        }
+
+        /* Papel Picado Banner */
+        .papel-picado {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .papel-picado svg {
+            height: 100%;
+            width: auto;
+        }
+
+        .banner-flag {
+            width: 60px;
+            height: 50px;
+            display: inline-block;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .banner-flag:nth-child(odd) { animation-delay: 0.2s; }
+        .banner-flag:nth-child(even) { animation-delay: 0.4s; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--cream);
+            border-bottom: 4px solid var(--fiesta-red);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-avocado {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #90EE90 0%, var(--fiesta-green) 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--brown);
+        }
+
+        .logo-avocado::after {
+            content: '😎';
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.8rem;
+            color: var(--fiesta-green);
+            text-shadow: 2px 2px 0 var(--fiesta-yellow);
+        }
+
+        .logo-text span {
+            color: var(--fiesta-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '🌶️';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--fiesta-red);
+        }
+
+        .nav-links a:hover::after {
+            transform: translateX(-50%) scale(1);
+        }
+
+        .order-btn {
+            background: var(--fiesta-red);
+            color: white;
+            padding: 0.9rem 2rem;
+            border: 3px solid var(--brown);
+            border-radius: 50px;
+            font-family: 'Lilita One', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0 var(--brown);
+        }
+
+        .order-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--brown);
+            background: var(--fiesta-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 10rem 5% 5rem;
+            background: 
+                linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            animation: floatEmoji 6s ease-in-out infinite;
+        }
+
+        .hero-decoration:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
+        .hero-decoration:nth-child(2) { top: 40%; right: 8%; animation-delay: 1s; }
+        .hero-decoration:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 2s; }
+        .hero-decoration:nth-child(4) { top: 60%; right: 15%; animation-delay: 0.5s; }
+
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--fiesta-yellow);
+            color: var(--brown-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 3px solid var(--brown);
+            margin-bottom: 1.5rem;
+            box-shadow: 3px 3px 0 var(--brown);
+        }
+
+        .hero h1 {
+            font-family: 'Lilita One', cursive;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--fiesta-green);
+            text-shadow: 3px 3px 0 var(--fiesta-yellow);
+        }
+
+        .hero h1 span {
+            color: var(--fiesta-red);
+            display: block;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: var(--fiesta-red);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--brown);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-primary {
+            background: var(--fiesta-red);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: 3px solid var(--brown);
+            border-radius: 50px;
+            font-family: 'Lilita One', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 5px 5px 0 var(--brown);
+        }
+
+        .btn-primary:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0 var(--brown);
+            background: var(--fiesta-orange);
+        }
+
+        .btn-secondary {
+            background: var(--fiesta-green);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: 3px solid var(--brown);
+            border-radius: 50px;
+            font-family: 'Lilita One', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 5px 5px 0 var(--brown);
+        }
+
+        .btn-secondary:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0 var(--brown);
+        }
+
+        .hero-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+        }
+
+        .hero-info-item span {
+            font-size: 1.3rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-main {
+            width: 100%;
+            border-radius: 30px;
+            border: 5px solid var(--brown);
+            box-shadow: 10px 10px 0 var(--fiesta-red);
+        }
+
+        .hero-sticker {
+            position: absolute;
+            background: var(--fiesta-yellow);
+            border: 3px solid var(--brown);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lilita One', cursive;
+            box-shadow: 4px 4px 0 var(--brown);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .hero-sticker.open {
+            top: -20px;
+            right: -20px;
+            background: var(--fiesta-green);
+            color: white;
+        }
+
+        .hero-sticker .big {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .hero-sticker .small {
+            font-size: 0.7rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1) rotate(-5deg); }
+            50% { transform: scale(1.05) rotate(5deg); }
+        }
+
+        /* Delivery Partners */
+        .delivery-strip {
+            background: var(--fiesta-red);
+            padding: 1.5rem 5%;
+            border-top: 4px solid var(--brown);
+            border-bottom: 4px solid var(--brown);
+        }
+
+        .delivery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .delivery-text {
+            color: white;
+            font-family: 'Lilita One', cursive;
+            font-size: 1.3rem;
+        }
+
+        .delivery-logos {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .delivery-logo {
+            background: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 2px solid var(--brown);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 6rem 5%;
+            background: var(--cream);
+        }
+
+        .menu-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Lilita One', cursive;
+            font-size: 3rem;
+            color: var(--fiesta-green);
+            text-shadow: 3px 3px 0 var(--fiesta-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--brown);
+            font-size: 1.1rem;
+        }
+
+        /* Menu Category */
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+
+        .menu-category-header {
+            background: linear-gradient(90deg, var(--fiesta-red) 0%, var(--fiesta-orange) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px 15px 0 0;
+            border: 4px solid var(--brown);
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-category-header h3 {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.8rem;
+        }
+
+        .menu-category-header span {
+            font-size: 2rem;
+        }
+
+        .menu-category-content {
+            background: white;
+            border: 4px solid var(--brown);
+            border-radius: 0 0 15px 15px;
+            padding: 2rem;
+        }
+
+        /* Food Cards Grid */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .food-card {
+            background: var(--cream);
+            border: 3px solid var(--brown);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0 var(--fiesta-yellow);
+        }
+
+        .food-card:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--fiesta-yellow);
+        }
+
+        .food-card-img {
+            height: 180px;
+            overflow: hidden;
+            border-bottom: 3px solid var(--brown);
+        }
+
+        .food-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .food-card:hover .food-card-img img {
+            transform: scale(1.1);
+        }
+
+        .food-card-content {
+            padding: 1.25rem;
+        }
+
+        .food-card h4 {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.3rem;
+            color: var(--fiesta-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .food-card p {
+            color: var(--brown);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .food-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .food-price {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.3rem;
+            color: var(--fiesta-green);
+        }
+
+        .food-calories {
+            font-size: 0.8rem;
+            color: var(--brown);
+            background: var(--fiesta-yellow);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            border: 2px solid var(--brown);
+        }
+
+        /* Build Your Own Section */
+        .build-section {
+            background: white;
+            border: 4px solid var(--brown);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .build-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .build-header h3 {
+            font-family: 'Lilita One', cursive;
+            font-size: 2.5rem;
+            color: var(--fiesta-green);
+            text-shadow: 2px 2px 0 var(--fiesta-yellow);
+        }
+
+        .build-step {
+            background: var(--cream);
+            border: 3px solid var(--brown);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .build-step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--fiesta-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lilita One', cursive;
+            font-size: 1.2rem;
+            border: 3px solid var(--brown);
+        }
+
+        .build-step h4 {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.4rem;
+            color: var(--fiesta-green);
+        }
+
+        .build-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .build-option {
+            background: white;
+            border: 2px solid var(--brown);
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .build-option:hover {
+            background: var(--fiesta-yellow);
+            transform: scale(1.05);
+        }
+
+        /* Protein Grid */
+        .protein-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .protein-item {
+            background: white;
+            border: 2px solid var(--brown);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .protein-item:hover {
+            background: var(--fiesta-yellow);
+            transform: translateX(5px);
+        }
+
+        .protein-item span {
+            font-weight: 600;
+        }
+
+        .protein-item .price {
+            font-family: 'Lilita One', cursive;
+            color: var(--fiesta-red);
+        }
+
+        /* Sauces */
+        .sauce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .sauce-item {
+            background: white;
+            border: 2px solid var(--brown);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .sauce-item:hover {
+            background: var(--fiesta-orange);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Sides & Extras */
+        .sides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .side-item {
+            background: var(--cream);
+            border: 2px solid var(--brown);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .side-item .name {
+            font-weight: 600;
+        }
+
+        .side-item .details {
+            text-align: right;
+        }
+
+        .side-item .price {
+            font-family: 'Lilita One', cursive;
+            color: var(--fiesta-red);
+        }
+
+        .side-item .cal {
+            font-size: 0.8rem;
+            color: var(--brown);
+        }
+
+        /* Family Kits */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .family-card {
+            background: linear-gradient(135deg, var(--fiesta-yellow) 0%, #FFF8DC 100%);
+            border: 4px solid var(--brown);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .family-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .family-card h4 {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.6rem;
+            color: var(--fiesta-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .family-card .serves {
+            background: var(--fiesta-green);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 2px solid var(--brown);
+        }
+
+        .family-card .price {
+            font-family: 'Lilita One', cursive;
+            font-size: 2.5rem;
+            color: var(--fiesta-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .family-card .cal {
+            font-size: 0.85rem;
+            color: var(--brown);
+            margin-bottom: 1rem;
+        }
+
+        .family-card p {
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+
+        /* Locations Section */
+        .locations {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--fiesta-green) 0%, #2E8B57 100%);
+            position: relative;
+        }
+
+        .locations::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--fiesta-red) 0px,
+                var(--fiesta-red) 30px,
+                var(--fiesta-yellow) 30px,
+                var(--fiesta-yellow) 60px,
+                var(--fiesta-green) 60px,
+                var(--fiesta-green) 90px,
+                var(--fiesta-orange) 90px,
+                var(--fiesta-orange) 120px
+            );
+        }
+
+        .locations-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .locations h2 {
+            font-family: 'Lilita One', cursive;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 3px 3px 0 var(--brown);
+            margin-bottom: 2rem;
+        }
+
+        .location-card {
+            background: white;
+            border: 4px solid var(--brown);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 8px 8px 0 var(--brown);
+        }
+
+        .location-card h3 {
+            font-family: 'Lilita One', cursive;
+            font-size: 2rem;
+            color: var(--fiesta-red);
+            margin-bottom: 1rem;
+        }
+
+        .location-card address {
+            font-style: normal;
+            font-size: 1.2rem;
+            color: var(--brown-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .location-card .phone {
+            font-family: 'Lilita One', cursive;
+            font-size: 2rem;
+            color: var(--fiesta-green);
+            margin-bottom: 1rem;
+        }
+
+        .location-hours {
+            display: inline-block;
+            background: var(--fiesta-yellow);
+            color: var(--brown-dark);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border: 3px solid var(--brown);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--brown-dark);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            text-shadow: none;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        .footer-col h4 {
+            font-family: 'Lilita One', cursive;
+            font-size: 1.2rem;
+            color: var(--fiesta-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--fiesta-yellow);
+        }
+
+        .footer-bottom {
+            border-top: 2px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--brown);
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-info {
+                justify-content: center;
+            }
+
+            .hero-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                top: 40px;
+            }
+
+            .papel-picado {
+                height: 40px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 8rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .delivery-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Papel Picado Banner -->
+    <div class="papel-picado">
+        <div style="display: flex; gap: 5px; padding-top: 10px;">
+            <div class="banner-flag" style="background: var(--fiesta-red);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-yellow);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-green);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-orange);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-pink);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-teal);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-red);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-yellow);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-green);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-orange);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-pink);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-teal);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-red);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-yellow);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-green);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-orange);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-pink);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-teal);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-red);"></div>
+            <div class="banner-flag" style="background: var(--fiesta-yellow);"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-avocado"></div>
+            <span class="logo-text">GUAC<span>-O-</span>LICIOUS</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#build">Build Your Own</a></li>
+            <li><a href="#family">Family Kits</a></li>
+            <li><a href="#location">Location</a></li>
+        </ul>
+        <button class="order-btn">Order Now! 🌮</button>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-decoration">🌮</div>
+        <div class="hero-decoration">🥑</div>
+        <div class="hero-decoration">🌶️</div>
+        <div class="hero-decoration">🫔</div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">🌟 Fresh & Healthy Mexican Grill</div>
+                <h1>GUAC-O-LICIOUS <span>Where Fresh Meets Delicious!</span></h1>
+                <p class="hero-tagline">Fresh & Healthy Mexican Grill</p>
+                <p>Made fresh daily with premium ingredients. Build your perfect bowl, burrito, tacos, or nachos exactly the way you want it!</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn-primary">View Menu 📋</a>
+                    <a href="#" class="btn-secondary">Order Now 🛒</a>
+                </div>
+                <div class="hero-info">
+                    <div class="hero-info-item">
+                        <span>📞</span> 484-912-5218
+                    </div>
+                    <div class="hero-info-item">
+                        <span>📍</span> Stroudsburg, PA
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/bowl-action.jpg" alt="Delicious Mexican Food" class="hero-image-main">
+                <div class="hero-sticker open">
+                    <span class="big">OPEN</span>
+                    <span class="small">7 DAYS</span>
+                    <span class="small">A WEEK!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Partners -->
+    <div class="delivery-strip">
+        <div class="delivery-container">
+            <span class="delivery-text">🚗 Order Delivery From:</span>
+            <div class="delivery-logos">
+                <span class="delivery-logo">Uber Eats</span>
+                <span class="delivery-logo">Grubhub</span>
+                <span class="delivery-logo">DoorDash</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="menu-container">
+            <div class="section-header">
+                <h2>🌮 Our Menu 🌮</h2>
+                <p>Fresh ingredients, bold flavors, made just for you!</p>
+            </div>
+
+            <!-- Birria Tacos -->
+            <div class="menu-category">
+                <div class="menu-category-header">
+                    <span>🔥</span>
+                    <h3>BIRRIA TACOS LICIOUS</h3>
+                </div>
+                <div class="menu-category-content">
+                    <div class="food-grid">
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/tacos.jpg" alt="Birria Tacos">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Birria Tacos (2pc)</h4>
+                                <p>Chicken or Beef, served with consomé for dipping</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$11.95</span>
+                                    <span class="food-calories">430-1150 Cal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/tacos-tray.jpg" alt="Birria Tacos 3pc">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Birria Tacos (3pc)</h4>
+                                <p>Chicken or Beef, served with consomé for dipping</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$15.95</span>
+                                    <span class="food-calories">430-1150 Cal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/prep.jpg" alt="Birria Pie">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Birria Pie</h4>
+                                <p>Large shareable birria quesadilla pie</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$30.95</span>
+                                    <span class="food-calories">Party Size</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tacos Licious -->
+            <div class="menu-category">
+                <div class="menu-category-header" style="background: linear-gradient(90deg, var(--fiesta-green) 0%, var(--fiesta-teal) 100%);">
+                    <span>🌮</span>
+                    <h3>TACOS LICIOUS</h3>
+                </div>
+                <div class="menu-category-content">
+                    <div class="food-grid">
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/tacos.jpg" alt="Street Tacos">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Street Tacos (2pc)</h4>
+                                <p>Soft or Crispy, pick one meat with your choice of toppings</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$11.95</span>
+                                    <span class="food-calories">390-1240 Cal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/tacos-tray.jpg" alt="Street Tacos 3pc">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Street Tacos (3pc)</h4>
+                                <p>Soft or Crispy, pick one meat with your choice of toppings</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$15.95</span>
+                                    <span class="food-calories">390-1240 Cal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specials -->
+            <div class="menu-category">
+                <div class="menu-category-header" style="background: linear-gradient(90deg, var(--fiesta-orange) 0%, var(--fiesta-yellow) 100%);">
+                    <span>⭐</span>
+                    <h3>SPECIALS LICIOUS</h3>
+                </div>
+                <div class="menu-category-content">
+                    <div class="food-grid">
+                        <div class="food-card">
+                            <div class="food-card-img">
+                                <img src="images/hero-bowl.jpg" alt="Tostada">
+                            </div>
+                            <div class="food-card-content">
+                                <h4>Tostada</h4>
+                                <p>Choice of one protein, served w/ black beans, pico de gallo, cheese, guac, lettuce and sauce</p>
+                                <div class="food-card-footer">
+                                    <span class="food-price">$8.95</span>
+                                    <span class="food-calories">333-690 Cal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids Menu -->
+            <div class="menu-category">
+                <div class="menu-category-header" style="background: linear-gradient(90deg, var(--fiesta-pink) 0%, var(--fiesta-red) 100%);">
+                    <span>👶</span>
+                    <h3>KIDS MEAL LICIOUS</h3>
+                </div>
+                <div class="menu-category-content">
+                    <p style="margin-bottom: 1rem; color: var(--fiesta-green); font-weight: 700;">Includes Organic Milk or Water</p>
+                    <div class="sides-grid">
+                        <div class="side-item">
+                            <div class="name">Kids Create Your Own</div>
+                            <div class="details">
+                                <span class="price">$8.95</span>
+                                <div class="cal">300-530 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Kids Cheese Quesadilla</div>
+                            <div class="details">
+                                <span class="price">$8.95</span>
+                                <div class="cal">310-540 Cal</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--brown);">Kids Create Your Own includes choice of a meat or guac & two toppings with two soft or crispy tortillas</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Build Your Own Section -->
+    <section class="menu" id="build" style="background: var(--cream-dark);">
+        <div class="menu-container">
+            <div class="build-section">
+                <div class="build-header">
+                    <h3>🛠️ BUILD YOUR OWN! 🛠️</h3>
+                </div>
+
+                <!-- Step 1: Base -->
+                <div class="build-step">
+                    <div class="build-step-header">
+                        <div class="step-number">1</div>
+                        <h4>CHOOSE YOUR BASE</h4>
+                    </div>
+                    <p style="margin-bottom: 1rem; color: var(--brown);">420-1310 Cal depending on selection</p>
+                    <div class="build-options">
+                        <span class="build-option">🥣 Bowl</span>
+                        <span class="build-option">🌯 Burrito</span>
+                        <span class="build-option">🧀 Nachos</span>
+                        <span class="build-option">🫓 Quesadilla</span>
+                        <span class="build-option">🌮 Crunch Wrap</span>
+                        <span class="build-option">🥗 Salad</span>
+                        <span class="build-option">🥗 Taco Salad</span>
+                        <span class="build-option">🍟 Fries</span>
+                    </div>
+                </div>
+
+                <!-- Step 2: Protein -->
+                <div class="build-step">
+                    <div class="build-step-header">
+                        <div class="step-number">2</div>
+                        <h4>CHOOSE YOUR PROTEIN</h4>
+                    </div>
+                    <div class="protein-grid">
+                        <div class="protein-item">
+                            <span>🍗 Grill Chicken</span>
+                            <span class="price">$12.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🍯 Honey Chipotle</span>
+                            <span class="price">$13.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🥩 Grilled Steak</span>
+                            <span class="price">$13.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🍖 Ground Beef</span>
+                            <span class="price">$13.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🦐 Grilled Shrimp</span>
+                            <span class="price">$13.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🥩 Beef Barbacoa</span>
+                            <span class="price">$13.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🥬 Veggie Fajita w/ Guac</span>
+                            <span class="price">$11.95</span>
+                        </div>
+                        <div class="protein-item">
+                            <span>🧈 Tofu</span>
+                            <span class="price">$11.95</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Toppings -->
+                <div class="build-step">
+                    <div class="build-step-header">
+                        <div class="step-number">3</div>
+                        <h4>CHOOSE YOUR TOPPINGS</h4>
+                    </div>
+                    <p style="margin-bottom: 1rem; font-style: italic; color: var(--fiesta-green); font-weight: 600;">From Our Fresh Selection</p>
+                    <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                        <div style="background: var(--fiesta-yellow); padding: 0.75rem 1.5rem; border-radius: 10px; border: 2px solid var(--brown);">
+                            <strong>Add Fresh Guac:</strong> $1.95
+                        </div>
+                        <div style="background: var(--fiesta-yellow); padding: 0.75rem 1.5rem; border-radius: 10px; border: 2px solid var(--brown);">
+                            <strong>Extra Protein:</strong> $2.95 per serving
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Sauce -->
+                <div class="build-step">
+                    <div class="build-step-header">
+                        <div class="step-number">4</div>
+                        <h4>CHOOSE OUR HOMEMADE SAUCE</h4>
+                    </div>
+                    <div class="sauce-grid">
+                        <div class="sauce-item">🌶️ Chipotle Sauce</div>
+                        <div class="sauce-item">🥭 Mango Sauce</div>
+                        <div class="sauce-item">🍋 Limon Sauce</div>
+                        <div class="sauce-item">🥛 Sour Cream Sauce</div>
+                        <div class="sauce-item">🥑 Guacado Sauce</div>
+                        <div class="sauce-item">🔥 Smoky Habanero</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sides -->
+            <div class="menu-category">
+                <div class="menu-category-header" style="background: linear-gradient(90deg, var(--fiesta-teal) 0%, var(--fiesta-green) 100%);">
+                    <span>🍟</span>
+                    <h3>SIDES</h3>
+                </div>
+                <div class="menu-category-content">
+                    <div class="sides-grid">
+                        <div class="side-item">
+                            <div class="name">Chips</div>
+                            <div class="details">
+                                <span class="price">$2.95</span>
+                                <div class="cal">430 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Fries Dipper</div>
+                            <div class="details">
+                                <span class="price">$4.95</span>
+                                <div class="cal">395 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Nacho Cheese Fries</div>
+                            <div class="details">
+                                <span class="price">$6.95</span>
+                                <div class="cal">598 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Tortilla On Side</div>
+                            <div class="details">
+                                <span class="price">$0.95</span>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Rice And Beans</div>
+                            <div class="details">
+                                <span class="price">$4.95</span>
+                                <div class="cal">160-220 Cal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="font-family: 'Lilita One', cursive; color: var(--fiesta-green); margin: 2rem 0 1rem; font-size: 1.3rem;">Dips & Combos (4oz | 8oz)</h4>
+                    <div class="sides-grid">
+                        <div class="side-item">
+                            <div class="name">Guacamole</div>
+                            <div class="details">
+                                <span class="price">$3.95 | $6.95</span>
+                                <div class="cal">270-660 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Queso</div>
+                            <div class="details">
+                                <span class="price">$3.95 | $6.95</span>
+                                <div class="cal">456-780 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Salsa</div>
+                            <div class="details">
+                                <span class="price">$2.95 | $5.45</span>
+                                <div class="cal">40-95 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Chips & Guac</div>
+                            <div class="details">
+                                <span class="price">$6.45 | $8.95</span>
+                                <div class="cal">510-770 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Chips & Queso</div>
+                            <div class="details">
+                                <span class="price">$6.45 | $8.95</span>
+                                <div class="cal">520-820 Cal</div>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="name">Chips & Salsa</div>
+                            <div class="details">
+                                <span class="price">$5.45 | $7.45</span>
+                                <div class="cal">435-545 Cal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverages & Desserts -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div class="menu-category" style="margin-bottom: 0;">
+                    <div class="menu-category-header" style="background: linear-gradient(90deg, #4169E1 0%, var(--fiesta-teal) 100%);">
+                        <span>🥤</span>
+                        <h3>BEVERAGES</h3>
+                    </div>
+                    <div class="menu-category-content">
+                        <div class="sides-grid" style="grid-template-columns: 1fr;">
+                            <div class="side-item">
+                                <div class="name">Bottle Drink</div>
+                                <div class="details"><span class="price">$2.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Water</div>
+                                <div class="details"><span class="price">$1.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Organic Tractor Tea</div>
+                                <div class="details"><span class="price">$4.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Organic Lemonade</div>
+                                <div class="details"><span class="price">$4.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Shake</div>
+                                <div class="details"><span class="price">$4.95</span></div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--brown);">Shakes: Vanilla | Chocolate | Strawberry | Oreo</p>
+                    </div>
+                </div>
+
+                <div class="menu-category" style="margin-bottom: 0;">
+                    <div class="menu-category-header" style="background: linear-gradient(90deg, var(--fiesta-pink) 0%, var(--fiesta-orange) 100%);">
+                        <span>🍰</span>
+                        <h3>DESSERTS</h3>
+                    </div>
+                    <div class="menu-category-content">
+                        <div class="sides-grid" style="grid-template-columns: 1fr;">
+                            <div class="side-item">
+                                <div class="name">Churros</div>
+                                <div class="details"><span class="price">$3.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Tres Leches Cake</div>
+                                <div class="details"><span class="price">$4.95</span></div>
+                            </div>
+                            <div class="side-item">
+                                <div class="name">Plantains</div>
+                                <div class="details"><span class="price">$3.95</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Family Kits -->
+    <section class="menu" id="family">
+        <div class="menu-container">
+            <div class="section-header">
+                <h2>👨‍👩‍👧‍👦 Family Kits 👨‍👩‍👧‍👦</h2>
+                <p>Perfect for sharing! Feeds 4-6 people</p>
+            </div>
+
+            <div class="family-grid">
+                <div class="family-card">
+                    <h4>🌮 Taco Kit</h4>
+                    <span class="serves">Feeds 4-6</span>
+                    <div class="price">$49.95</div>
+                    <div class="cal">5900-6626 Cal</div>
+                    <p>Comes with 12 soft corn tortillas, your choice of 2 proteins, pico de gallo, salsa, rice, beans, lettuce, shredded cheese, sour cream.</p>
+                </div>
+                <div class="family-card">
+                    <h4>🧀 Nacho Kit</h4>
+                    <span class="serves">Feeds 4-6</span>
+                    <div class="price">$49.95</div>
+                    <div class="cal">8912-9798 Cal</div>
+                    <p>Comes with chips, your choice of (2) proteins, (2) queso, (2) pico de gallo, salsa, beans, jalapeños, sour cream.</p>
+                </div>
+                <div class="family-card">
+                    <h4>🫓 Fajita Kit</h4>
+                    <span class="serves">Feeds 4-6</span>
+                    <div class="price">$55.95</div>
+                    <div class="cal">6341-7160 Cal</div>
+                    <p>Comes with 12 soft corn tortillas, your choice of 2 proteins, fajita, guac, pico de gallo, salsa, rice, beans, lettuce, shredded cheese, sour cream.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="locations" id="location">
+        <div class="locations-container">
+            <h2>📍 Visit Us! 📍</h2>
+            <div class="location-card">
+                <h3>Stroudsburg, PA</h3>
+                <address>
+                    100 N 9th Road<br>
+                    Stroudsburg, PA 18360
+                </address>
+                <div class="phone">📞 484-912-5218</div>
+                <div class="location-hours">🕐 OPEN 7 DAYS A WEEK!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-avocado"></div>
+                        <span class="logo-text">GUAC<span>-O-</span>LICIOUS</span>
+                    </a>
+                    <p>Fresh & Healthy Mexican Grill serving Stroudsburg, PA. Made fresh daily with premium ingredients!</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#menu">Birria Tacos</a></li>
+                        <li><a href="#menu">Tacos</a></li>
+                        <li><a href="#build">Build Your Own</a></li>
+                        <li><a href="#family">Family Kits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Order</h4>
+                    <ul>
+                        <li><a href="#">Uber Eats</a></li>
+                        <li><a href="#">Grubhub</a></li>
+                        <li><a href="#">DoorDash</a></li>
+                        <li><a href="#">Pickup</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:484-912-5218">484-912-5218</a></li>
+                        <li><a href="#">Stroudsburg, PA</a></li>
+                        <li><a href="#">Catering</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Guac-O-Licious. All rights reserved. Fresh & Healthy Mexican Grill 🥑</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
